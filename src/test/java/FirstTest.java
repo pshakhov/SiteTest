@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
@@ -31,7 +32,6 @@ public class FirstTest {
         drv = new ChromeDriver();
 
         drv.get("http://newtours.demoaut.com");
-
     }
 
     @Test
@@ -57,8 +57,10 @@ public class FirstTest {
                 ("//input[@name = 'login'][@value = 'Login']"));
         element.click();
 
+        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
         /* Find a Flight PAge opened assertion.**/
-        MatcherAssert.assertThat("Login failed!",
+        MatcherAssert.assertThat("Login failed or TimeOut!",
                 drv.getTitle().contains("Find a Flight"));
     }
 
@@ -135,6 +137,8 @@ public class FirstTest {
        element = drv.findElement(By.xpath
                ("//input[@name = 'findFlights']"));
        element.click();
+
+        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
         /* Select a Flight Page opened assertion.**/
        MatcherAssert.assertThat("Can`t open page"
@@ -217,10 +221,12 @@ public class FirstTest {
                 ("//input[@name = 'reserveFlights']"));
         element.click();
 
+        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
         /* Book a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
                         + " Book a Flight!",
-                drv.getCurrentUrl().contains("mercurypurchase"));
+                drv.getCurrentUrl().contains("/mercurypurchase.php"));
     }
 
     @Test
@@ -469,17 +475,19 @@ public class FirstTest {
                 ("//input[@name = 'buyFlights']"));
         element.click();
 
-        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* Flight Confirmation page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + " Flight Confirmation!",
+                        + " Flight Confirmation or TimeOut!",
                 drv.getCurrentUrl().contains("/mercurypurchase2.php"));
     }
 
     /* Flight Confirmation assert test method.**/
     @Test
     public void test5() {//correct last assertion!
+
+        drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         System.out.println("@Test method 5 invoked."
                 + " Flight Confirmation.");
@@ -542,20 +550,21 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("((//p)[5]/font)[1]"));
         String strBillTo = element.getText();
+        MatcherAssert.assertThat("Incorrect billing receiver!",
+                element.getText().contains("Ivan Ivanovich Ivanov"));
+        MatcherAssert.assertThat("Incorrect billing street!",
+                element.getText().contains("1085 Borregas Ave."));
         MatcherAssert.assertThat("Incorrect billing address!",
-                element.getText().contains("Ivan Ivanovich Ivanov\n"
-                        + "1085 Borregas Ave.\n"
-                        + "\n"
-                        + "Albuquerque, New Mexico, 94089\n"
-                        + "AX 0\n"));
+                element.getText().contains("Albuquerque, New Mexico, 94089"));
 
         /* Delivery address assertion.**/
         element = drv.findElement(By.xpath
                 ("(//p)[6]/font"));
         String strDelTo = element.getText();
+        MatcherAssert.assertThat("Incorrect delivery street!",
+                element.getText().contains("1225 Borregas Ave."));
         MatcherAssert.assertThat("Incorrect delivery address!",
-                element.getText().contains("1225 Borregas Ave.\n"
-                        + "                    Boston, Massachusetts, 91089\n"));
+                element.getText().contains("Boston, Massachusetts, 91089"));
 
         /* Total price including taxes assertion.**/
         element = drv.findElement(By.xpath
