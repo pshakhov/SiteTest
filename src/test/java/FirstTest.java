@@ -268,6 +268,173 @@ public class FirstTest {
         MatcherAssert.assertThat("Incorrect passengers!",
                 element.getText().contains("2"));
 
+        element = drv.findElement(By.xpath
+                ("(//td[@class = 'data_left'])[8]/font"));
+        String strTaxes = element.getText();
+        MatcherAssert.assertThat("Incorrect taxes!",
+                element.getText().contains("$91"));
 
+        /* Total Price check.**/
+        element = drv.findElement(By.xpath
+                ("(//td[@class = 'data_left'])[10]/font/b"));
+        String strTotal = element.getText();
+        MatcherAssert.assertThat("Incorrect total price," +
+                        "including taxes!",
+                element.getText().contains("$1199"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'passFirst0']"));
+        element.sendKeys("Ivanov");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'passLast0']"));
+        element.sendKeys("Ivan");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'pass.0.meal']"));
+        Select sel = new Select(element);
+        sel.selectByValue("Bland");
+
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'passFirst1']"));
+        element.sendKeys("Ivanova");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'passLast1']"));
+        element.sendKeys("Irina");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'pass.1.meal']"));
+        sel = new Select(element);
+        sel.selectByValue("Bland");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'creditCard']"));
+        sel = new Select(element);
+        sel.selectByValue("Visa");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'creditnumber']"));
+        element.sendKeys("5479540454132487");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'cc_exp_dt_mn']"));
+        sel = new Select(element);
+        sel.selectByValue("05");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'cc_exp_dt_yr']"));
+        sel = new Select(element);
+        sel.selectByValue("2009");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'cc_frst_name']"));
+        element.sendKeys("Ivan");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'cc_mid_name']"));
+        element.sendKeys("Ivanovich");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'cc_last_name']"));
+        element.sendKeys("Ivanov");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'billAddress1']"));
+        element.sendKeys("1085 Borregas Ave.");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'billCity']"));
+        element.sendKeys("Albuquerque");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'billState']"));
+        element.sendKeys("New Mexico");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'billZip']"));
+        element.sendKeys("94089");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'billCountry']"));
+        sel = new Select(element);
+        sel.selectByValue("UNITED STATES");
+
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("(//input[@name = 'ticketLess'])[2]"));
+        sel = new Select(element);
+        sel.selectByValue("checkbox");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'delAddress1']"));
+        element.sendKeys("1225 Borregas Ave.");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'delCity']"));
+        element.sendKeys("Boston");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'delCity']"));
+        element.sendKeys("Boston");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'delState']"));
+        element.sendKeys("Massachusetts");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'delZip']"));
+        element.sendKeys("91089");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//select[@name = 'delCountry']"));
+        sel = new Select(element);
+        sel.selectByValue("UNITED STATES");
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("//input[@name = 'buyFlights']"));
+        element.click();
+
+        MatcherAssert.assertThat("Can`t open page"
+                        + "Flight Confirmation!",
+                drv.getTitle().contains("Flight Confirmation"));
+    }
+
+    /* .**/
+    @Test
+    public void flightConfirmation() {
+
+        MatcherAssert.assertThat("Can`t open page"
+                        + "Flight Confirmation!",
+                drv.getTitle().contains("Flight Confirmation"));
+
+        
     }
 }
