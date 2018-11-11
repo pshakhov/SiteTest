@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.concurrent.TimeUnit;
+
 public class FirstTest {
 
     private static WebDriver drv;
@@ -29,6 +31,7 @@ public class FirstTest {
         drv = new ChromeDriver();
 
         drv.get("http://newtours.demoaut.com");
+
     }
 
     @Test
@@ -36,6 +39,8 @@ public class FirstTest {
 
         System.out.println("@Test method 1 invoked."
                 + " Login and assert.");
+
+        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
         /* UserName input.**/
         WebElement element = drv.findElement
@@ -165,14 +170,19 @@ public class FirstTest {
         MatcherAssert.assertThat("Incorrect departing date!",
                 element.getText().contains("11/20/"));
 
-        /* Carrier To select.**/
+        /* Carrier Depart choose.**/
         element = drv.findElement(By.xpath
                 ("(//input[@name = 'outFlight'])[4]"));
         element.click();
 
-        /* Price To.**/
+        /* Carrier Return choose.**/
         element = drv.findElement(By.xpath
                 ("(//input[@name = 'inFlight'])[2]"));
+        element.click();
+
+        /* Price To save.**/
+        element = drv.findElement(By.xpath
+                ("(//td[@class = 'data_verb_xcols']//b)[4]"));
         String priceTo = element.getText(); //saves?
         element.click();
 
@@ -182,7 +192,7 @@ public class FirstTest {
                         + "td[@class = 'title'])[7]//font"));
         String strFrom = element.getText();
         MatcherAssert.assertThat("Incorrect returning destination!",
-                element.getText().contains("Paris to Seattle"));
+                element.getText().contains("Seattle to Paris"));
 
         /* Returning Date From assertion.**/
         element = drv.findElement(By.xpath
@@ -192,11 +202,9 @@ public class FirstTest {
         MatcherAssert.assertThat("Incorrect returning date!",
                 element.getText().contains("12/19/"));
 
-        /* Carrier From Saving.**/
+        /* Carrier From choose.**/
         element = drv.findElement(By.xpath
-                ("//input[@name = 'inFlight']"
-                        + "[contains[@value, "
-                        + "'Blue Skies Airlines$631')]")); //check it!
+                ("(//input[@name = 'inFlight'])[2]")); //check it!
         element.click();
 
         /*Price From Saving.**/
@@ -211,8 +219,8 @@ public class FirstTest {
 
         /* Book a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + "Book a Flight!",
-                drv.getTitle().contains("Book a Flight"));
+                        + " Book a Flight!",
+                drv.getCurrentUrl().contains("mercurypurchase"));
     }
 
     @Test
@@ -247,8 +255,8 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("(//td[@class = 'data_left'])[1]//b"));
         String strFlightTo = element.getText();
-        MatcherAssert.assertThat("Incorrect airlines!",
-                element.getText().contains("Unified Airlines 363"));
+        MatcherAssert.assertThat("Incorrect carrier!",
+                element.getText().contains("363"));
 
         /* Class To assertion.**/
         element = drv.findElement(By.xpath
@@ -259,7 +267,7 @@ public class FirstTest {
 
         /* Price To assertion.**/
         element = drv.findElement(By.xpath
-                ("(//td[@class = 'frame_header_info'])[5]/font"));
+                ("(//td[@class = 'data_center'])[1]/font"));
         String strPriceTo = element.getText();
         MatcherAssert.assertThat("Incorrect price!",
                 element.getText().contains("281"));
@@ -283,7 +291,7 @@ public class FirstTest {
                 ("(//td[@class = 'data_left'])[4]//b"));
         String strFlightFrom = element.getText();
         MatcherAssert.assertThat("Incorrect carrier!",
-                element.getText().contains("Unified Airlines 631"));
+                element.getText().contains("631"));
 
         /* Class From assertion.**/
         element = drv.findElement(By.xpath
@@ -335,7 +343,7 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("//select[@name = 'pass.0.meal']"));
         Select sel = new Select(element);
-        sel.selectByValue("Bland");
+        sel.selectByVisibleText("Bland");
 
         /* Next Passenger First Name input.**/
         element = drv.findElement(By.xpath
@@ -351,13 +359,13 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("//select[@name = 'pass.1.meal']"));
         sel = new Select(element);
-        sel.selectByValue("Bland");
+        sel.selectByVisibleText("Bland");
 
         /* Credit Card type select.**/
         element = drv.findElement(By.xpath
                 ("//select[@name = 'creditCard']"));
         sel = new Select(element);
-        sel.selectByValue("Visa");
+        sel.selectByVisibleText("Visa");
 
         /* Credit Card Number input.**/
         element = drv.findElement(By.xpath
@@ -368,13 +376,13 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("//select[@name = 'cc_exp_dt_mn']"));
         sel = new Select(element);
-        sel.selectByValue("05");
+        sel.selectByVisibleText("05");
 
         /* Expiration Year select.**/
         element = drv.findElement(By.xpath
                 ("//select[@name = 'cc_exp_dt_yr']"));
         sel = new Select(element);
-        sel.selectByValue("2009");
+        sel.selectByVisibleText("2009");
 
         /* First Name input.**/
         element = drv.findElement(By.xpath
@@ -394,75 +402,79 @@ public class FirstTest {
         /* Billing Address input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'billAddress1']"));
+        element.clear();
         element.sendKeys("1085 Borregas Ave.");
 
         /* Billing City input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'billCity']"));
+        element.clear();
         element.sendKeys("Albuquerque");
 
         /* Billing State input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'billState']"));
+        element.clear();
         element.sendKeys("New Mexico");
 
         /* Billing Zip input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'billZip']"));
+        element.clear();
         element.sendKeys("94089");
 
         /* Billing Country select.**/
         element = drv.findElement(By.xpath
                 ("//select[@name = 'billCountry']"));
         sel = new Select(element);
-        sel.selectByValue("UNITED STATES");
+        sel.selectByVisibleText("UNITED STATES");
 
         /* Same as Billing Address checking.**/
         element = drv.findElement(By.xpath
-                ("(//input[@name = 'ticketLess'])[2]"));
-        sel = new Select(element);
-        sel.selectByValue("checkbox");
+                ("(//input[@value = 'checkbox'])[2]"));
+        element.click();
 
         /* Delivery Address input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'delAddress1']"));
+        element.clear();
         element.sendKeys("1225 Borregas Ave.");
 
         /* Delivery City input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'delCity']"));
-        element.sendKeys("Boston");
-
-        /* Delivery City input.**/
-        element = drv.findElement(By.xpath
-                ("//input[@name = 'delCity']"));
+        element.clear();
         element.sendKeys("Boston");
 
         /* Delivery State input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'delState']"));
+        element.clear();
         element.sendKeys("Massachusetts");
 
         /* Delivery Zip input.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'delZip']"));
+        element.clear();
         element.sendKeys("91089");
 
         /* Delivery Country select.**/
         element = drv.findElement(By.xpath
                 ("//select[@name = 'delCountry']"));
         sel = new Select(element);
-        sel.selectByValue("UNITED STATES");
+        sel.selectByVisibleText("UNITED STATES");
 
         /* Secure Purchase button click.**/
         element = drv.findElement(By.xpath
                 ("//input[@name = 'buyFlights']"));
         element.click();
 
+        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+
         /* Flight Confirmation page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + "Flight Confirmation!",
-                drv.getTitle().contains("Flight Confirmation"));
+                        + " Flight Confirmation!",
+                drv.getCurrentUrl().contains("/mercurypurchase2.php"));
     }
 
     /* Flight Confirmation assert test method.**/
@@ -474,7 +486,7 @@ public class FirstTest {
 
         /* Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + "Flight Confirmation!",
+                        + " Flight Confirmation!",
                 drv.getTitle().contains("Flight Confirmation"));
 
         /* Departing From assertion.**/
@@ -486,14 +498,14 @@ public class FirstTest {
 
         /* Departing From Date assertion.**/
         element = drv.findElement(By.xpath
-                ("((//td[@class = 'frame_header_info'])[3]/font/br)[1]"));
+                ("(//td[@class = 'frame_header_info'])[3]/font"));
         String strDateTo = element.getText();
         MatcherAssert.assertThat("Incorrect departing date!",
-                element.getText().contains("11/20"));
+                element.getText().contains("11/20/"));
 
         /* Departing carrier assertion.**/
         element = drv.findElement(By.xpath
-                ("((//td[@class = 'frame_header_info'])[3]/font/br)[1]"));
+                ("(//td[@class = 'frame_header_info'])[3]/font"));
         String strAirlinesTo = element.getText();
         MatcherAssert.assertThat("Incorrect departing carrier!",
                 element.getText().contains("Unified Airlines 363"));
@@ -507,14 +519,14 @@ public class FirstTest {
 
         /* Returning date assertion.**/
         element = drv.findElement(By.xpath
-                ("((//td[@class = 'frame_header_info'])[5]/font/br)[1]"));
+                ("(//td[@class = 'frame_header_info'])[5]/font"));
         String strDateFrom = element.getText();
         MatcherAssert.assertThat("Incorrect returning date!",
                 element.getText().contains("12/19"));
 
         /* Avia-carrier assertion.**/
         element = drv.findElement(By.xpath
-                ("((//td[@class = 'frame_header_info'])[5]/font/br)[1]"));
+                ("(//td[@class = 'frame_header_info'])[5]/font"));
         String strAirlinesFrom = element.getText();
         MatcherAssert.assertThat("Incorrect returning carrier!",
                 element.getText().contains("Blue Skies Airlines 631"));
