@@ -431,10 +431,53 @@ public class FirstTest {
     @Test
     public void flightConfirmation() {
 
+        /* .**/
         MatcherAssert.assertThat("Can`t open page"
                         + "Flight Confirmation!",
                 drv.getTitle().contains("Flight Confirmation"));
 
-        
+        /* .**/
+        WebElement element = drv.findElement(By.xpath
+                ("(//td[@class = 'frame_header_info'])[3]/font/b"));
+        String strTo = element.getText();
+        MatcherAssert.assertThat("Incorrect departing!",
+                element.getText().contains("Paris to Seattle"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//td[@class = 'frame_header_info'])[3]/font/br)[1]"));
+        String strDateTo = element.getText();
+        MatcherAssert.assertThat("Incorrect departing date!",
+                element.getText().contains("11/20"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//td[@class = 'frame_header_info'])[3]/font/br)[1]"));
+        String strAirlinesTo = element.getText();
+        MatcherAssert.assertThat("Incorrect airlines!",
+                element.getText().contains("Unified Airlines 363"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("(//td[@class = 'frame_header_info'])[5]/font/b"));
+        String strFrom = element.getText();
+        MatcherAssert.assertThat("Incorrect returning!",
+                element.getText().contains("Seattle to Paris"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//td[@class = 'frame_header_info'])[5]/font/br)[1]"));
+        String strDateFrom = element.getText();
+        MatcherAssert.assertThat("Incorrect returning date!",
+                element.getText().contains("12/19"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//td[@class = 'frame_header_info'])[5]/font/br)[1]"));
+        String strAirlinesFrom = element.getText();
+        MatcherAssert.assertThat("Incorrect returning airlines!",
+                element.getText().contains("Blue Skies Airlines 631"));
+
+
     }
 }
