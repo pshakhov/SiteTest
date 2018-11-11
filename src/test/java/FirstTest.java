@@ -478,6 +478,41 @@ public class FirstTest {
         MatcherAssert.assertThat("Incorrect returning airlines!",
                 element.getText().contains("Blue Skies Airlines 631"));
 
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("(//td[@class = 'data_left'])[2]/font"));
+        String strPassengers = element.getText();
+        MatcherAssert.assertThat("Incorrect passengers!",
+                element.getText().contains("2"));
 
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//p)[5]/font)[1]"));
+        String strBillTo = element.getText();
+        MatcherAssert.assertThat("Incorrect billing address!",
+                element.getText().contains("Ivan Ivanovich Ivanov\n"
+                        + "1085 Borregas Ave.\n"
+                        + "\n"
+                        + "Albuquerque, New Mexico, 94089\n"
+                        + "AX 0\n"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("(//p)[6]/font"));
+        String strDelTo = element.getText();
+        MatcherAssert.assertThat("Incorrect delivery address!",
+                element.getText().contains("1225 Borregas Ave.\n"
+                        + "                    Boston, Massachusetts, 91089\n"));
+
+        /* .**/
+        element = drv.findElement(By.xpath
+                ("((//p)[5]/font)[1]"));
+        String strTotalPrice = element.getText();
+        MatcherAssert.assertThat("Incorrect billing address!",
+                element.getText().contains("Ivan Ivanovich Ivanov\n"
+                        + "1085 Borregas Ave.\n"
+                        + "\n"
+                        + "Albuquerque, New Mexico, 94089\n"
+                        + "AX 0\n"));
     }
 }
