@@ -35,11 +35,6 @@
       <change beforePath="$PROJECT_DIR$/../Phonebook/out/production/Phonebook/Phonebook.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Phonebook/out/production/Phonebook/Phonebook.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Phonebook/src/Phonebook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Phonebook/src/Phonebook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/FirstTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/FirstTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/FirstTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/FirstTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-FirstTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-FirstTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire/surefire2276160340977988981tmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire/surefire_06880500691118150278tmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire/surefirebooter1337391854997164142.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../javaMap/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaMap/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../javaMap/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaMap/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../javaMap/out/production/javaMap/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/../javaMap/out/production/javaMap/Account.class" afterDir="false" />
@@ -83,13 +78,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="4" />
-          <entry key="java" value="8474" />
+          <entry key="java" value="8739" />
           <entry key="xml" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="8474" />
+          <entry key="JAVA" value="8739" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="XML" value="11" />
         </counts>
@@ -110,8 +105,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/FirstTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="489" column="69" selection-start-line="489" selection-start-column="69" selection-end-line="489" selection-end-column="69" />
+            <state relative-caret-position="68">
+              <caret line="501" column="8" selection-start-line="501" selection-start-column="8" selection-end-line="501" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#18722#18723#0" expanded="true" />
@@ -167,8 +162,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="517" />
-    <option name="y" value="2" />
+    <option name="x" value="503" />
+    <option name="y" value="5" />
     <option name="width" value="858" />
     <option name="height" value="745" />
   </component>
@@ -237,7 +232,32 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="MavenRunConfiguration" factoryName="Maven">
+    <configuration name="SiteTesting [test]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="test" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -262,8 +282,7 @@
     </configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="517" y="2" width="858" height="745" extended-state="0" />
-    <editor active="true" />
+    <frame x="503" y="5" width="858" height="745" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10150376" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -301,8 +320,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/FirstTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="489" column="69" selection-start-line="489" selection-start-column="69" selection-end-line="489" selection-end-column="69" />
+        <state relative-caret-position="68">
+          <caret line="501" column="8" selection-start-line="501" selection-start-column="8" selection-end-line="501" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#18722#18723#0" expanded="true" />

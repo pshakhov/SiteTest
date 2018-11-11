@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
@@ -25,8 +24,9 @@ public class FirstTest {
     - поля UserName и Password пустые.**/
     @BeforeClass
     public static void beforeClassMethod() { // done method
+
         System.out.println("@BeforeClass static method invoked. "
-                + "WebDriver init and preconds:");
+                + "WebDriver initialising, preconditioned.");
 
         System.setProperty("webdriver.chrome.driver","webdrivers/chromedriver.exe");
         drv = new ChromeDriver();
@@ -37,10 +37,10 @@ public class FirstTest {
     @Test
     public void test1() { // done method
 
-        System.out.println("@Test method 1 invoked."
+        System.out.println("Login @Test method 1 invoked."
                 + " Login and assert.");
 
-        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* UserName input.**/
         WebElement element = drv.findElement
@@ -57,22 +57,24 @@ public class FirstTest {
                 ("//input[@name = 'login'][@value = 'Login']"));
         element.click();
 
-        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
-        /* Find a Flight PAge opened assertion.**/
+        /* Find a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Login failed or TimeOut!",
-                drv.getTitle().contains("Find a Flight"));
+                drv.getCurrentUrl().contains("/mercuryreservation.php"));
     }
 
     @Test
-    /* Flight Finder test method.**/
+    /* Flight Finder test method 2.**/
     public void test2() { //done method
 
-        System.out.println("@Test method 2 invoked."
+        System.out.println("Flight Finder @Test method 2 invoked."
                 + " Find a flight.");
 
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
         /* Find a Flight Page opened assertion.**/
-        MatcherAssert.assertThat("Login failed!",
+        MatcherAssert.assertThat("Login failed or TimeOut!",
                 drv.getTitle().contains("Find a Flight"));
 
         /* Trip Type select.**/
@@ -138,24 +140,28 @@ public class FirstTest {
                ("//input[@name = 'findFlights']"));
        element.click();
 
-        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+        //drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
         /* Select a Flight Page opened assertion.**/
        MatcherAssert.assertThat("Can`t open page"
-                       + "Select a Flight!",
+                       + " Select a Flight!",
                drv.getTitle().contains("Select a Flight"));
     }
 
     @Test
-    /* Select a Flight test method.**/
+    /* Select a Flight test method 3.**/
     public void test3() {
 
-        System.out.println("@Test method 3 invoked."
+        System.out.println("Select a Flight @Test method 3 invoked."
                 + " Select a Flight.");
+
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* Select a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + "Select a Flight!",
+                        + " Select a Flight!",
                 drv.getTitle().contains("Select a Flight"));
 
         /* Departing To Destination assertion.**/
@@ -221,7 +227,8 @@ public class FirstTest {
                 ("//input[@name = 'reserveFlights']"));
         element.click();
 
-        drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        //drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 
         /* Book a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
@@ -230,11 +237,13 @@ public class FirstTest {
     }
 
     @Test
-    /* Book Flight assertion method.**/
+    /* Book Flight assertion method 4.**/
     public void test4() {
 
-        System.out.println("@Test method 4 invoked."
+        System.out.println("Book a Flight @Test method 4 invoked."
                 + " Book a flight.");
+
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* Book a Flight Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
@@ -483,18 +492,18 @@ public class FirstTest {
                 drv.getCurrentUrl().contains("/mercurypurchase2.php"));
     }
 
-    /* Flight Confirmation assert test method.**/
+    /* Flight Confirmation assert test method 5.**/
     @Test
     public void test5() {//correct last assertion!
 
-        drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        System.out.println("@Test method 5 invoked."
+        System.out.println("Flight Confirmation @Test method 5 invoked."
                 + " Flight Confirmation.");
+
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* Page opened assertion.**/
         MatcherAssert.assertThat("Can`t open page"
-                        + " Flight Confirmation!",
+                        + " Flight Confirmation or Timeout!",
                 drv.getTitle().contains("Flight Confirmation"));
 
         /* Departing From assertion.**/
@@ -578,6 +587,8 @@ public class FirstTest {
         element = drv.findElement(By.xpath
                 ("(//a)[13]"));
         element.click();
+
+        drv.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
         /* Homepage opened assertion.**/
         MatcherAssert.assertThat("Can`t open home page!",
