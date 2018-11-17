@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="FirstTest" time="17.479" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="FirstTest" time="66.127" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2018.2.4"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -30,7 +30,7 @@
     <property name="os.name" value="Windows 10"/>
     <property name="classworlds.conf" value="C:\Users\stabi\AppData\Local\JetBrains\Toolbox\apps\IDEA-E\ch-0\182.4505.49\plugins\maven\lib\maven3\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1251"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter;;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.181-1\bin;C:\Program Files\Git\cmd;C:\Users\stabi\AppData\Local\Microsoft\WindowsApps;C:\Program Files\apache-maven-3.5.4\bin;C:\Users\stabi\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Program Files\Java\jdk1.8.0_181;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.181-1\bin;C:\Program Files\Git\cmd;C:\Users\stabi\AppData\Local\Microsoft\WindowsApps;C:\Program Files\apache-maven-3.5.4\bin;C:\Users\stabi\AppData\Local\Programs\Microsoft VS Code Insiders\bin;C:\Program Files\Java\jdk1.8.0_181;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,9 +62,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="FirstTest" name="test1" time="4.487"/>
-  <testcase classname="FirstTest" name="test2" time="2.07"/>
-  <testcase classname="FirstTest" name="test3" time="1.882"/>
-  <testcase classname="FirstTest" name="test4" time="7.224"/>
-  <testcase classname="FirstTest" name="test5" time="1.816"/>
+  <testcase classname="FirstTest" name="test1" time="9.794"/>
+  <testcase classname="FirstTest" name="test2" time="17.45"/>
+  <testcase classname="FirstTest" name="test3" time="16.918"/>
+  <testcase classname="FirstTest" name="test4" time="15.951"/>
+  <testcase classname="FirstTest" name="test5" time="6.014"/>
 </testsuite>

@@ -1,47 +1,72 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
+/** Select flight #3.*/
 public class SelectFlightPage {
+    /** Constructor.
+     * @param driver */
+    SelectFlightPage(final WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
+
+    /** Driver.*/
+    WebDriver driver;
+
+    /** Depart.*/
     @FindBy(xpath = "(//form[@method = 'post']//"
                        + "td[@class = 'title'])[3]//font")
-    WebElement strTo;
+    WebElement strDepart;
 
+    /** Depart date.*/
     @FindBy(xpath = "(//form[@method = 'post']//"
                        + "td[@class = 'title'])[4]//font")
-    WebElement strDateTo;
+    WebElement strDepartDate;
 
+    /** Depart airlines.*/
     @FindBy(xpath = "(//input[@name = 'outFlight'])[4]")
-    WebElement airlinesTo;
+    WebElement departAirlines;
 
+    /** Depart price.*/
     @FindBy(xpath = "(//td[@class = 'data_verb_xcols']//b)[4]")
-    WebElement priceTo;
+    WebElement strDepartPrice;
 
+    /** Return.*/
     @FindBy(xpath = "(//form[@method = 'post']//"
                        + "td[@class = 'title'])[7]//font")
-    WebElement strFrom;
+    WebElement strReturn;
 
+    /** Return date.*/
     @FindBy(xpath = "(//form[@method = 'post']//"
                        + "td[@class = 'title'])[8]//font")
-    WebElement strDateFrom;
+    WebElement strReturnDate;
 
+    /** Return airlines.*/
     @FindBy(xpath = "(//input[@name = 'inFlight'])[2]")
-    WebElement airlinesFrom;
+    WebElement returnAirlines;
 
+    /** PReturn price.*/
     @FindBy(xpath = "(//td[@class = 'data_verb_xcols']//b)[6]")
-    WebElement priceFrom;
+    WebElement strReturnPrice;
 
+    /** Continue button.*/
     @FindBy(xpath = "//input[@name = 'reserveFlights']")
     WebElement reserveFlights;
 
+    /** Select flight method realization.*/
     public void selectFlight() {
-        strTo.getText();
-        strDateTo.getText();
-        airlinesTo.click();
-        priceTo.getText();
-        strFrom.getText();
-        strDateFrom.getText();
-        airlinesFrom.click();
-        priceFrom.getText();
+        strDepart.getText();
+        strDepartDate.getText();
+        departAirlines.click();
+        strDepartPrice.getText();
+
+        strReturn.getText();
+        strReturnDate.getText();
+        returnAirlines.click();
+        strReturnPrice.getText();
+
         reserveFlights.click();
     }
 }

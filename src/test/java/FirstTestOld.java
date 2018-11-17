@@ -22,7 +22,7 @@ public class FirstTestOld {
     предварительные действия:
     - перейти на сайт http://newtours.demoaut.com;
     - поля UserName и Password пустые.**/
-    @BeforeClass
+
     public static void beforeClassMethod() { // done method
 
         System.out.println("@BeforeClass static method invoked. "
@@ -34,8 +34,7 @@ public class FirstTestOld {
         drv.get("http://newtours.demoaut.com");
     }
 
-    @Test
-    public void test1() { // done method
+    public void login() { // done method
 
         System.out.println("Login @Test method 1 invoked."
                 + " Login and assert.");
@@ -64,7 +63,6 @@ public class FirstTestOld {
                 drv.getCurrentUrl().contains("/mercuryreservation.php"));
     }
 
-    @Test
     /* Flight Finder test method 2.**/
     public void test2() { //done method
 
@@ -150,7 +148,6 @@ public class FirstTestOld {
                drv.getTitle().contains("Select a Flight"));
     }
 
-    @Test
     /* Select a Flight test method 3.**/
     public void test3() {
 
@@ -236,7 +233,6 @@ public class FirstTestOld {
                 drv.getCurrentUrl().contains("/mercurypurchase.php"));
     }
 
-    @Test
     /* Book Flight assertion method 4.**/
     public void test4() {
 
@@ -493,7 +489,6 @@ public class FirstTestOld {
     }
 
     /* Flight Confirmation assert test method 5.**/
-    @Test
     public void test5() {//correct last assertion!
 
         System.out.println("Flight Confirmation @Test method 5 invoked."
@@ -595,7 +590,6 @@ public class FirstTestOld {
                 drv.getTitle().contains("Welcome"));
     }
 
-    @AfterClass
     /* Post-conditions methods, webdriver close.**/
     public static void AfterClassMethod() {
         drv.close();
