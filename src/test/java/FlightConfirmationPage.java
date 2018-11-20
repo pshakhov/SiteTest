@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 /** Flight confirmation #5.*/
 public class FlightConfirmationPage {
-    /** Constructor.*/
+    /** Constructor.
+     * @param driver*/
     public FlightConfirmationPage(final WebDriver driver) {
         wait = new WebDriverWait(driver,  10,
                  500);
