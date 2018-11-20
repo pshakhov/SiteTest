@@ -2,19 +2,33 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**Flight booking #4.*/
 public class BookFlightPage {
     /** Create constructor.
      * @param driver */
     public BookFlightPage(final WebDriver driver) {
+        wait = new WebDriverWait(driver, 10,
+                500);
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
+    /** Waiting method.*/
+    public void pageWaiting() {
+        wait.until(ExpectedConditions.
+                titleContains("Book a Flight"));
+    }
+
+    /** Waiting.*/
+    private Wait<WebDriver> wait;
+
     /** Driver.*/
-    public WebDriver driver;
+    private WebDriver driver;
 
     /** To dest string find.*/
     @FindBy(xpath = "(//td[@class = 'frame_header_info'])[1]/"
@@ -54,119 +68,119 @@ public class BookFlightPage {
     @FindBy(xpath = "(//td[@class = 'data_center_mono'])[4]/font")
     WebElement strServClassFrom;
 
-    /** Service class TO string find.*/
+    /** Price from find.*/
     @FindBy(xpath = "(//td[@class = 'data_center'])[3]/font")
     WebElement strPriceFrom;
 
-    /** Service class TO string find.*/
+    /** Pass count find.*/
     @FindBy(xpath = "(//td[@class = 'data_left'])[6]/font")
     WebElement strPassCount;
 
-    /** Service class TO string find.*/
+    /** Taxes find.*/
     @FindBy(xpath = "(//td[@class = 'data_left'])[8]/font")
     WebElement strTaxes;
 
-    /** Service class TO string find.*/
+    /** Total price find.*/
     @FindBy(xpath = "(//td[@class = 'data_left'])[10]/font/b")
     WebElement strTotal;
 
-    /** Service class TO string find.*/
+    /** 1st passenger first name find.*/
     @FindBy(xpath = "//input[@name = 'passFirst0']")
     WebElement passFirst0;
 
-    /** Service class TO string find.*/
+    /** 1st passenger last name find.*/
     @FindBy(xpath = "//input[@name = 'passLast0']")
     WebElement passLast0;
 
-    /** Service class TO string find.*/
+    /** 1st passenger meal.*/
     @FindBy(xpath = "//select[@name = 'pass.0.meal']")
     WebElement passMeal0;
 
-    /** Service class TO string find.*/
+    /** 2nd passenger first name find.*/
     @FindBy(xpath = "//input[@name = 'passFirst1']")
     WebElement passFirst1;
 
-    /** Service class TO string find.*/
+    /** 2nd passenger last name find.*/
     @FindBy(xpath = "//input[@name = 'passLast1']")
     WebElement passLast1;
 
-    /** Service class TO string find.*/
+    /** 2nd passenger meal find.*/
     @FindBy(xpath = "//select[@name = 'pass.1.meal']")
     WebElement passMeal1;
 
-    /** Service class TO string find.*/
+    /** Credit card type find.*/
     @FindBy(xpath = "//select[@name = 'creditCard']")
     WebElement creditCard;
 
-    /** Service class TO string find.*/
+    /** Credit card number find.*/
     @FindBy(xpath = "//input[@name = 'creditnumber']")
     WebElement creditNumber;
 
-    /** Service class TO string find.*/
+    /** Credit card exp month find.*/
     @FindBy(xpath = "//select[@name = 'cc_exp_dt_mn']")
     WebElement CCExpDtMn;
 
-    /** Service class TO string find.*/
+    /** Credit card exp year find.*/
     @FindBy(xpath = "//select[@name = 'cc_exp_dt_yr']")
     WebElement CCExpDtYr;
 
-    /** Service class TO string find.*/
+    /** Cardholder first name find.*/
     @FindBy(xpath = "//input[@name = 'cc_frst_name']")
     WebElement ccFirstName;
 
-    /** Service class TO string find.*/
+    /** Cardholder mid name find.*/
     @FindBy(xpath = "//input[@name = 'cc_mid_name']")
     WebElement ccMidName;
 
-    /** Service class TO string find.*/
+    /** Cardholder last name find.*/
     @FindBy(xpath = "//input[@name = 'cc_last_name']")
     WebElement ccLastName;
 
-    /** Service class TO string find.*/
+    /** Bill address find.*/
     @FindBy(xpath = "//input[@name = 'billAddress1']")
     WebElement billAddress;
 
-    /** Service class TO string find.*/
+    /** Bill city find.*/
     @FindBy(xpath = "//input[@name = 'billCity']")
     WebElement billCity;
 
-    /** Service class TO string find.*/
+    /** Bill state find.*/
     @FindBy(xpath = "//input[@name = 'billState']")
     WebElement billState;
 
-    /** Service class TO string find.*/
+    /** Bill zip find.*/
     @FindBy(xpath = "//input[@name = 'billZip']")
     WebElement billZip;
 
-    /** Service class TO string find.*/
+    /** Bill country find.*/
     @FindBy(xpath = "//select[@name = 'billCountry']")
     WebElement billCountry;
 
-    /** Service class TO string find.*/
+    /** Same as Bill checkbox find.*/
     @FindBy(xpath = "(//input[@value = 'checkbox'])[2]")
     WebElement sameAsBill;
 
-    /** Service class TO string find.*/
+    /** Delivery address find.*/
     @FindBy(xpath = "//input[@name = 'delAddress1']")
     WebElement delAddress;
 
-    /** Service class TO string find.*/
+    /** Delivery city find.*/
     @FindBy(xpath = "//input[@name = 'delCity']")
     WebElement delCity;
 
-    /** Service class TO string find.*/
+    /** Delivery state find.*/
     @FindBy(xpath = "//input[@name = 'delState']")
     WebElement delState;
 
-    /** Service class TO string find.*/
+    /** Delivery zip find.*/
     @FindBy(xpath = "//input[@name = 'delZip']")
     WebElement delZip;
 
-    /** Service class TO string find.*/
+    /** Delivery country find.*/
     @FindBy(xpath = "//select[@name = 'delCountry']")
     WebElement delCountry;
 
-    /** Service class TO string find.*/
+    /** Secure purchase button find.*/
     @FindBy(xpath = "//input[@name = 'buyFlights']")
     WebElement securePurchase;
 

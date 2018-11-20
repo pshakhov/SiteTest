@@ -2,15 +2,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /** Select flight #3.*/
 public class SelectFlightPage {
     /** Constructor.
      * @param driver */
     SelectFlightPage(final WebDriver driver) {
+        wait = new WebDriverWait(driver,  10,
+                 500);
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+
+    /** Wait. */
+    private Wait<WebDriver> wait;
 
     /** Driver.*/
     WebDriver driver;
@@ -68,5 +76,11 @@ public class SelectFlightPage {
         strReturnPrice.getText();
 
         reserveFlights.click();
+    }
+
+    /** Waiting method.*/
+    public void pageWaiting() {
+        wait.until(ExpectedConditions.
+                titleContains("Select a Flight"));
     }
 }

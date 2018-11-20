@@ -1,15 +1,12 @@
+
 import org.hamcrest.MatcherAssert;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omg.CORBA.TIMEOUT;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
 
 /** Test for newtours.demoaut.com.
  * @author Pavel Shakhov.
@@ -124,7 +121,6 @@ public class FirstTest {
     /** Var for taxes. */
     private static final int TAXES = 91;
 
-
     /** Test class.*/
     public FirstTest() {
         System.out.print("Constructor created.");
@@ -154,8 +150,6 @@ public class FirstTest {
 
         /** Window maximizing.*/
         drv.manage().window().maximize();
-        //drv.manage().timeouts().implicitlyWait(waitLengthMs,
-        // TimeUnit.SECONDS);
 
         /** Create page objects and save it to vars.*/
         homePage = new HomePage(drv);
@@ -167,66 +161,31 @@ public class FirstTest {
         /** Page open.*/
         drv.get("http://newtours.demoaut.com");
 
-        /** Create Wait obj.*/
-        final Wait<WebDriver> wait = new WebDriverWait(drv, TIMEOUT, SLEEP);
-
-        //wait.until(ExpectedConditions.urlContains("/index.php"));
+        homePage.pageWaiting();
     }
 
-    /** Login test method.*/
+    /** Main test.*/
     @Test
-    public void test1() {
-
-        System.out.println("Login @Test method 1 invoked."
-                + " Login and assert.");
+    public void test() {
 
         /** Logpas typing. */
         homePage.signInAs(LOGIN, PASSWORD);
 
         /** Page open wait. */
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        flightFinderPage.pageWaiting();
 
-        /** Find a Flight Page opened assertion. */
-        MatcherAssert.assertThat("Login failed or TimeOut!",
-                drv.getCurrentUrl().contains("/mercuryreservation.php"));
-                //drv.getTitle().contains("Find a Flight"));
-    }
-
-    /** Flight finding test method.*/
-    @Test
-    public void test2() {
-
-        System.out.println("Flight Finder @Test method 2 invoked."
-                + " Find a flight.");
-
-        /* Find a Flight Page opened assertion.**/
+        /** Find a Flight Page opened assertion.*/
         MatcherAssert.assertThat("Login failed or TimeOut!",
                 drv.getTitle().contains("Find a Flight"));
 
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        flightFinderPage.findFlightsFrom(PASS_COUNT, PORT_FROM,
+                MONTH_FROM, DAY_FROM);
+        flightFinderPage.findFlightsIn(PORT_TO, MONTH_TO, DAY_TO);
+        flightFinderPage.setPreferences(AIRLINES);
 
-       flightFinderPage.findFlightsFrom(PASS_COUNT, PORT_FROM,
-               MONTH_FROM, DAY_FROM);
-       flightFinderPage.findFlightsIn(PORT_TO, MONTH_TO, DAY_TO);
-       flightFinderPage.setPreferences(AIRLINES);
+        selectFlightPage.pageWaiting();
 
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-
-        /* Select a Flight Page opened assertion.**/
-       MatcherAssert.assertThat("Can`t open page"
-                       + " Select a Flight!",
-               //drv.getTitle().contains("Select a Flight"));
-               drv.getCurrentUrl().contains("/mercuryreservation2.php"));
-    }
-
-    /** Flight selecting test method.*/
-    @Test
-    public void test3() {
-
-        System.out.println("Select a Flight @Test method 3 invoked."
-                + " Select a Flight.");
-
-        /* Select a Flight Page opened assertion.**/
+        /** Select a Flight Page opened assertion.*/
         MatcherAssert.assertThat("Can`t open page"
                         + " Select a Flight!",
                 drv.getTitle().contains("Select a Flight"));
@@ -240,9 +199,9 @@ public class FirstTest {
 
         selectFlightPage.departAirlines.click();
 
-        selectFlightPage.strDepartPrice.getText();
-        parsedPriceTo = Integer.parseInt(selectFlightPage.strDepartPrice.
-                getText().substring(8));
+//        selectFlightPage.strDepartPrice.getText();
+//        parsedPriceTo = Integer.parseInt(selectFlightPage.strDepartPrice.
+//                getText().substring(8));
 
         MatcherAssert.assertThat("Incorrect returning destination!",
                 selectFlightPage.strReturn.getText().
@@ -255,31 +214,14 @@ public class FirstTest {
         selectFlightPage.returnAirlines.click();
 
         selectFlightPage.strReturnPrice.getText();
-        parsedPriceFrom = Integer.parseInt(selectFlightPage.strReturnPrice.
-                getText().substring(8));
-
+//        parsedPriceFrom = Integer.parseInt(selectFlightPage.strReturnPrice.
+//                getText().substring(8));
 
         selectFlightPage.reserveFlights.click();
 
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-        //drv.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+        bookFlightPage.pageWaiting();
 
-        /* Book a Flight Page opened assertion.**/
-        MatcherAssert.assertThat("Can`t open page"
-                        + " Book a Flight!",
-                drv.getCurrentUrl().contains("/mercurypurchase.php"));
-    }
-
-    /** Flight booking assertion test method.*/
-    @Test
-    public void test4() {
-
-        System.out.println("Book a Flight @Test method 4 invoked."
-                + " Book a flight.");
-
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-
-        /* Book a Flight Page opened assertion.**/
+        /** Book a Flight Page opened assertion.*/
         MatcherAssert.assertThat("Can`t open page"
                         + "Book a Flight!",
                 drv.getTitle().contains("Book a Flight"));
@@ -298,6 +240,8 @@ public class FirstTest {
 
         MatcherAssert.assertThat("Incorrect price!",
                 bookFlightPage.strPriceTo.getText().contains("281"));
+        int parsePriceTo = Integer.parseInt(bookFlightPage.strPriceTo.
+                getText());
 
         MatcherAssert.assertThat("Incorrect returning!",
                 bookFlightPage.strFrom.getText().contains("Seattle to Paris"));
@@ -313,6 +257,8 @@ public class FirstTest {
 
         MatcherAssert.assertThat("Incorrect price!",
                 bookFlightPage.strPriceFrom.getText().contains("273"));
+        int parsePriceFrom = Integer.parseInt(bookFlightPage.strPriceFrom.
+                getText());
 
         MatcherAssert.assertThat("Incorrect number of passengers!",
                 bookFlightPage.strPassCount.getText().contains("2"));
@@ -320,13 +266,14 @@ public class FirstTest {
         parsedTaxes = Integer.parseInt(bookFlightPage.strTaxes.
                 getText().substring(1));
         MatcherAssert.assertThat("Incorrect taxes!",
-                //bookFlightPage.strTaxes.getText().contains("$91"));
                 parsedTaxes == TAXES);
 
         parsedTotal = Integer.parseInt(bookFlightPage.strTotal.
                 getText().substring(1));
 
-        int parsedSummary = parsedPriceFrom * 2 + parsedPriceTo * 2
+        /** Total Price рассчитывается из сумм в Summary.
+         *  * 2 пассажира, + сумма из «Taxes».*/
+        int parsedSummary = parsePriceFrom * 2 + parsePriceTo * 2
                 + parsedTaxes;
         //System.out.println(parsedSummary);
 
@@ -347,24 +294,9 @@ public class FirstTest {
         bookFlightPage.setDeliveryAddress(DEL_ADDRESS, DEL_CITY, DEL_STATE,
                 DEL_ZIP, DEL_COUNTRY);
 
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        flightConfirmationPage.pageWaiting();
 
-        /* Flight Confirmation page opened assertion.**/
-        MatcherAssert.assertThat("Can`t open page"
-                        + " Flight Confirmation or TimeOut!",
-                drv.getCurrentUrl().contains("/mercurypurchase2.php"));
-    }
-
-    /** Flight confirmation assertion test method.*/
-    @Test
-    public void test5() { //correct last assertion!
-
-        System.out.println("Flight Confirmation @Test method 5 invoked."
-                + " Flight Confirmation.");
-
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-
-        /* Page opened assertion.**/
+        /** Flight confirmation page opened assertion.*/
         MatcherAssert.assertThat("Can`t open page"
                         + " Flight Confirmation or Timeout!",
                 drv.getTitle().contains("Flight Confirmation"));
@@ -374,11 +306,11 @@ public class FirstTest {
                         contains("Paris to Seattle"));
 
         MatcherAssert.assertThat("Incorrect departing date!",
-               flightConfirmationPage.strDateTo.getText().contains("11/20/"));
+                flightConfirmationPage.strDateTo.getText().contains("11/20/"));
 
         MatcherAssert.assertThat("Incorrect departing carrier!",
                 flightConfirmationPage.strAirlinesTo.getText().
-                contains("Unified Airlines 363"));
+                        contains("Unified Airlines 363"));
 
         MatcherAssert.assertThat("Incorrect returning destination!",
                 flightConfirmationPage.strFrom.getText().
@@ -391,6 +323,20 @@ public class FirstTest {
         MatcherAssert.assertThat("Incorrect returning carrier!",
                 flightConfirmationPage.strAirlinesFrom.getText().
                         contains("Blue Skies Airlines 631"));
+
+        int parsedPriceTo = Integer.parseInt(flightConfirmationPage.
+                strPriceTo.getText().split("\\$")[1].
+                replaceAll("[^0-9]", ""));
+
+        int parsedPriceFrom = Integer.parseInt(flightConfirmationPage.
+                strPriceFrom.getText().split("\\$")[1].
+                replaceAll("[^0-9]", ""));
+
+        int parseTaxes = Integer.parseInt(flightConfirmationPage.
+                strTotalTaxes.getText().replaceAll("[^0-9]", ""));
+
+        int parseTotal = parsedPriceFrom * 2 + parsedPriceTo * 2
+                + parseTaxes;
 
         MatcherAssert.assertThat("Incorrect number of passengers!",
                 flightConfirmationPage.strPassCount.getText().
@@ -413,21 +359,28 @@ public class FirstTest {
                 flightConfirmationPage.strDelTo.getText().
                         contains("Boston, Massachusetts, 91089"));
 
-        /** .*/
+        int parseTotalPrice = Integer.parseInt(flightConfirmationPage.
+                strTotalPrice.getText().replaceAll("[^0-9]", ""));
+
+        /** Total price assertion.*/
         MatcherAssert.assertThat("Incorrect total price,"
-                        + "including taxes!",
-                flightConfirmationPage.strTotalPrice.getText().
-                        contains("$1199")); //correct this assert
+                + " including taxes! -- "
+                + parseTotalPrice + " != "
+                        + parsedPriceFrom
+                        + "*2 + " + parsedPriceTo + "*2 +"
+                        + parseTaxes + " = " + parseTotal,
+                parseTotalPrice == parseTotal);
 
         /** Back to Home button click.*/
         flightConfirmationPage.backToHome.click();
 
         /** Wait.*/
-        drv.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        homePage.pageWaiting();
 
         /** HomePage is opened assertion.*/
         MatcherAssert.assertThat("Can`t open home page!",
                 drv.getTitle().contains("Welcome"));
+
     }
 
     /** Close WebDriver, post-conds.*/
